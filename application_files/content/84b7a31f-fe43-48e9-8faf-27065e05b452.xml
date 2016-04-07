@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>FRB_ES_getCustomerInfo</name>
+        <uuid>84b7a31f-fe43-48e9-8faf-27065e05b452</uuid>
+        <description></description>
+        <parentUuid>_a-0000db85-cbb5-8000-6ee0-010000010000_2578</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>=load(
+  #&quot;SYSTEM_SYSRULES_formLayout&quot;(
+  label: &quot;Customer Information&quot;,
+  instructions: &quot;Please provide details about customer.&quot;,
+  firstColumnContents: {
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+      label: &quot;Customer Information&quot;,
+      firstColumnContents: {
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;Name&quot;,
+          labelPosition: &quot;ABOVE&quot;,
+          value:ri!customerName,
+          saveInto:ri!customerName,
+        
+          refreshAfter: &quot;UNFOCUS&quot;,
+          required:true,
+          validations: {},
+          align: &quot;LEFT&quot;
+        ),
+        
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;Stock Ticker ID&quot;,
+          labelPosition: &quot;ABOVE&quot;,
+          value:ri!customerTickerID,
+          saveInto:ri!customerTickerID,
+        
+          refreshAfter: &quot;UNFOCUS&quot;,
+          required:true,
+          validations: {},
+          align: &quot;LEFT&quot;
+        )
+      },
+      secondColumnContents: {
+        #&quot;SYSTEM_SYSRULES_dateField&quot;(
+          label: &quot;Onboarding Date&quot;,
+          labelPosition: &quot;ABOVE&quot;,
+          value:ri!customerDOB,
+          saveInto:ri!customerDOB,
+          required:true,
+          validations: {},
+          align: &quot;LEFT&quot;
+        )
+      }
+    ),
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+      label: &quot;Account Information&quot;,
+      firstColumnContents: {
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;Account Number&quot;,
+          labelPosition: &quot;ABOVE&quot;,
+          value:ri!accountNumber,
+          saveInto:ri!accountNumber,
+          refreshAfter: &quot;UNFOCUS&quot;,
+          required:true,
+          validations: {},
+          align: &quot;LEFT&quot;
+        ),
+        
+        if(fn!isnull(ri!customerTickerID),{},#&quot;_a-0000db88-450a-8000-6ee0-010000010000_2600&quot;(ri!customerTickerID))
+      },
+      secondColumnContents: {
+       
+      }
+    )
+  },
+  secondColumnContents: {},
+  buttons: #&quot;SYSTEM_SYSRULES_ButtonLayout&quot;(
+    primaryButtons: {
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+        label: &quot;Submit&quot;,
+        style: &quot;PRIMARY&quot;,
+        saveInto: {}
+      )
+    },
+    secondaryButtons: {
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+        label: &quot;Cancel&quot;,
+        style: &quot;NORMAL&quot;,
+        value: true,
+        saveInto: ri!cancel,
+        skipValidation: true
+      )
+    }
+  ),
+  validations: {}
+)
+)</definition>
+        <namedTypedValue>
+            <name>cancel</name>
+            <type>
+                <name>boolean</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>customerName</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>customerDOB</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>accountNumber</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>customerTickerID</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users>
+                <userUuid>Administrator</userUuid>
+            </users>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>

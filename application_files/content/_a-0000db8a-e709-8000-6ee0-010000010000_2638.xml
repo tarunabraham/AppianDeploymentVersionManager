@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>FRB_ES_getAccountRecordListView</name>
+        <uuid>_a-0000db8a-e709-8000-6ee0-010000010000_2638</uuid>
+        <description></description>
+        <parentUuid>_a-0000db89-ac9f-8000-6ee0-010000010000_2617</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>= #&quot;SYSTEM_SYSRULES_listViewItem&quot;(
+  title: &quot;Account(&quot; &amp; rf!accountID &amp; &quot;) &quot; &amp; &quot; Account Holder: &quot; &amp; rf!accountHolderName,
+  details: &quot;Account Type :&quot; &amp; rf!accountType &amp; char(
+    13
+  ) &amp; &quot;Custodian :&quot; &amp; rf!custodian
+)</definition>
+        <preferredEditor>legacy</preferredEditor>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users>
+                <userUuid>tarun.admin</userUuid>
+            </users>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>

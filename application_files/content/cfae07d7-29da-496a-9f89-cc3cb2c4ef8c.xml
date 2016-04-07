@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <queryRule>
+        <name>FRB_ES_getPrevIPSAssociatedWithAccountByAccountID</name>
+        <uuid>cfae07d7-29da-496a-9f89-cc3cb2c4ef8c</uuid>
+        <description></description>
+        <folderUuid>_a-0000db89-ac9f-8000-6ee0-010000010000_2617</folderUuid>
+        <dataStoreEntityCompositeUuid>77f74647-a40c-4252-a51f-89f6444bb34d@_a-0000db88-450a-8000-6ee0-010000010000_2589</dataStoreEntityCompositeUuid>
+        <params>
+            <param>
+                <description>Account ID</description>
+                <name>accountID</name>
+                <type>{http://www.w3.org/2001/XMLSchema}int</type>
+            </param>
+            <param>
+                <description>Current Date</description>
+                <name>currentDate</name>
+                <type>{http://www.w3.org/2001/XMLSchema}date</type>
+            </param>
+        </params>
+        <filters>
+            <filter>
+                <field>
+                    <name>accountID</name>
+                    <type>{http://www.w3.org/2001/XMLSchema}int</type>
+                </field>
+                <op>=</op>
+                <value>accountID</value>
+                <valueType>PARAMETER</valueType>
+            </filter>
+            <filter>
+                <field>
+                    <name>expirationDate</name>
+                    <type>{http://www.w3.org/2001/XMLSchema}date</type>
+                </field>
+                <op>&lt;=</op>
+                <value>currentDate</value>
+                <valueType>PARAMETER</valueType>
+            </filter>
+        </filters>
+        <orderings>
+            <ordering>
+                <ascending>true</ascending>
+                <field>
+                    <name>effectiveDate</name>
+                    <type>{http://www.w3.org/2001/XMLSchema}date</type>
+                </field>
+            </ordering>
+        </orderings>
+    </queryRule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users>
+                <userUuid>tarun.admin</userUuid>
+            </users>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>

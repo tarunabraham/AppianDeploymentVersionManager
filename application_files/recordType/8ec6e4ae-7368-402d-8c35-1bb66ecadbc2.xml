@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<recordTypeHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <recordType name="IPS" a:uuid="8ec6e4ae-7368-402d-8c35-1bb66ecadbc2">
+        <a:pluralName>Investment Policy Statements</a:pluralName>
+        <a:description>List of all active Investment Policy Statements</a:description>
+        <a:urlStub>oB6T3g</a:urlStub>
+        <a:source xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="a:DataStoreEntity" a:uuid="a6b23d9e-ad45-432f-b88a-6cfb98989308@_a-0000db88-450a-8000-6ee0-010000010000_2589"/>
+        <a:listViewTemplateExpr>=#&quot;_a-0000db89-ac9f-8000-6ee0-010000010000_2627&quot;()</a:listViewTemplateExpr>
+        <a:detailViewCfg>
+            <a:nameExpr>=&quot;Summary&quot;</a:nameExpr>
+            <a:uiExpr>=#&quot;7c677033-9030-4ca1-82dc-051c2d3c95b2&quot;(
+goal:rf!goal,
+objectives:rf!objectives,
+currentAssets:rf!currentAssets,
+timeHorizon:rf!timeHorizon,
+modeledReturnPCT:rf!modeledReturnPCT,
+modeledLossPCT:rf!modeledLossPCT,
+riskTolerances:rf!riskTolerances,
+assetClassPreferences:rf!assetClassPreferences
+)</a:uiExpr>
+            <a:visibilityExpr>=true()</a:visibilityExpr>
+            <a:urlStub>summary</a:urlStub>
+            <a:headerExpr></a:headerExpr>
+        </a:detailViewCfg>
+        <a:defaultSortInfo>
+            <field>IPSID</field>
+            <ascending>true</ascending>
+        </a:defaultSortInfo>
+        <a:isSystem>false</a:isSystem>
+        <a:dataSrcExpr></a:dataSrcExpr>
+        <a:facetsListExpr></a:facetsListExpr>
+        <a:defaultFiltersExpr></a:defaultFiltersExpr>
+        <a:security>16383</a:security>
+    </recordType>
+    <roleMap>
+        <role name="record_type_administrator">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000db85-cbb2-8000-6edf-010000010000_8</groupUuid>
+            </groups>
+        </role>
+        <role name="record_type_viewer">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000db85-cbb2-8000-6edf-010000010000_7</groupUuid>
+            </groups>
+        </role>
+    </roleMap>
+</recordTypeHaul>

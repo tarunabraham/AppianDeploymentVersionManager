@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>FRB_ES_getCustomerRecordSummaryView</name>
+        <uuid>24564ad8-bf39-42d6-880a-ec189e3fdd17</uuid>
+        <description></description>
+        <parentUuid>_a-0000db88-450a-8000-6ee0-010000010000_2593</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>=load(
+  
+  #&quot;SYSTEM_SYSRULES_dashboardLayout&quot;(
+  label: &quot;Customer Information&quot;,
+ 
+  firstColumnContents: {
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+      label: &quot;Customer Information&quot;,
+      firstColumnContents: {
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;Name&quot;,
+          readOnly:true,
+          labelPosition: &quot;ADJACENT&quot;,
+          value:ri!customerName,
+          refreshAfter: &quot;UNFOCUS&quot;,
+          
+          align: &quot;LEFT&quot;
+        )
+      },
+      secondColumnContents: {
+        #&quot;SYSTEM_SYSRULES_dateField&quot;(
+          label: &quot;On Boarding Date&quot;,
+           readOnly:true,
+          labelPosition: &quot;ADJACENT&quot;,
+          value:ri!customerDOB,
+          
+          align: &quot;LEFT&quot;
+        )
+      }
+    ),
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+      label: &quot;Account Information&quot;,
+      firstColumnContents: {
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;Account Number&quot;,
+           readOnly:true,
+          labelPosition: &quot;ADJACENT&quot;,
+          value:ri!accountNumber,
+          
+          align: &quot;LEFT&quot;
+        ),
+        
+        #&quot;_a-0000db88-450a-8000-6ee0-010000010000_2600&quot;(ri!customerTickerID)
+      },
+      secondColumnContents: {
+       
+      }
+    )
+  },
+  secondColumnContents: {}
+  
+)
+
+)</definition>
+        <namedTypedValue>
+            <name>customerName</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>customerDOB</name>
+            <type>
+                <name>date</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>accountNumber</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>customerTickerID</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users>
+                <userUuid>tarun.admin</userUuid>
+            </users>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>

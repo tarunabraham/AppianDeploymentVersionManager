@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>FRB_ES_getIPSInformation</name>
+        <uuid>7c677033-9030-4ca1-82dc-051c2d3c95b2</uuid>
+        <description></description>
+        <parentUuid>_a-0000db89-ac9f-8000-6ee0-010000010000_2616</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>=load(
+  {
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+      label: &quot;Executive Summary&quot;,
+      firstColumnContents: {
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;Goal&quot;,
+          labelPosition: &quot;ADJACENT&quot;,
+          value: ri!goal,
+          readOnly: true,
+          align: &quot;LEFT&quot;
+        ),
+        
+         #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;Objectives&quot;,
+          labelPosition: &quot;ADJACENT&quot;,
+          value: ri!objectives,
+          readOnly: true,
+          align: &quot;LEFT&quot;
+        )
+      },
+      secondColumnContents: {
+        
+         #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;Current Assets&quot;,
+          labelPosition: &quot;ADJACENT&quot;,
+          value: ri!currentAssets,
+          readOnly: true,
+          align: &quot;LEFT&quot;
+        ),
+        
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;Time Horizon&quot;,
+          labelPosition: &quot;ADJACENT&quot;,
+          value: ri!timeHorizon,
+          readOnly: true,
+          align: &quot;LEFT&quot;
+        ),
+        
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;Modeled Return&quot;,
+          labelPosition: &quot;ADJACENT&quot;,
+          value: ri!modeledReturnPCT,
+          readOnly: true,
+          align: &quot;LEFT&quot;
+        ),
+        
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;Modeled Loss&quot;,
+          labelPosition: &quot;ADJACENT&quot;,
+          value: ri!modeledLossPCT,
+          readOnly: true,
+          align: &quot;LEFT&quot;
+        )
+      }
+    ),
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+      label: &quot;Risk Tolerances&quot;,
+      firstColumnContents: {
+     
+       #&quot;SYSTEM_SYSRULES_paragraphField&quot;(
+         value:ri!riskTolerances,
+         readOnly:true
+       )
+      }
+    ),
+    
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+      label: &quot;Asset Class Preferences&quot;,
+      firstColumnContents: {
+       #&quot;SYSTEM_SYSRULES_paragraphField&quot;(
+         value:ri!assetClassPreferences,
+         readOnly:true
+       )
+      }
+    )
+}
+)</definition>
+        <namedTypedValue>
+            <name>goal</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>objectives</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>currentAssets</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>timeHorizon</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>modeledReturnPCT</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>modeledLossPCT</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>riskTolerances</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>assetClassPreferences</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users>
+                <userUuid>tarun.admin</userUuid>
+            </users>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>

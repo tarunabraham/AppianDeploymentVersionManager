@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>FRB_ES_associateIPSToAnAccount</name>
+        <uuid>8685e110-8d6b-4e25-9d09-dfa571cc0b5c</uuid>
+        <description></description>
+        <parentUuid>_a-0000db89-ac9f-8000-6ee0-010000010000_2617</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>=load(&#xD;
+  &#xD;
+  local!searchTimeHorizon,&#xD;
+  &#xD;
+  local!searchIPSPagingInfo:#&quot;SYSTEM_SYSRULES_pagingInfo&quot;(&#xD;
+    startIndex:1,&#xD;
+    batchSize:-1,&#xD;
+    sort:#&quot;SYSTEM_SYSRULES_sortInfo&quot;(&#xD;
+      field:&quot;IPSID&quot;,&#xD;
+      ascending:true&#xD;
+    )&#xD;
+  ),&#xD;
+  local!searchIPSSel:#&quot;SYSTEM_SYSRULES_gridSelection&quot;(&#xD;
+    pagingInfo:local!searchIPSPagingInfo,&#xD;
+    selected:{}&#xD;
+  ),&#xD;
+  &#xD;
+  local!currentAccountIPSPagingInfo:#&quot;SYSTEM_SYSRULES_pagingInfo&quot;(&#xD;
+    startIndex:1,&#xD;
+    batchSize:-1,&#xD;
+    sort:#&quot;SYSTEM_SYSRULES_sortInfo&quot;(&#xD;
+      field:&quot;effectiveDate&quot;,&#xD;
+      ascending:true&#xD;
+    )&#xD;
+  ),&#xD;
+  &#xD;
+  local!prevAccountIPSPagingInfo:#&quot;SYSTEM_SYSRULES_pagingInfo&quot;(&#xD;
+    startIndex:1,&#xD;
+    batchSize:5,&#xD;
+    sort:#&quot;SYSTEM_SYSRULES_sortInfo&quot;(&#xD;
+      field:&quot;effectiveDate&quot;,&#xD;
+      ascending:true&#xD;
+    )&#xD;
+  ),&#xD;
+  &#xD;
+  local!searchIPSInfo,&#xD;
+  &#xD;
+with(&#xD;
+  local!currentAccountIPSInfo:#&quot;a9e23335-404e-48f4-aa43-e83e247c31e0&quot;(accountID:if(isnull(ri!accountID),0,ri!accountID),currentDate:today(),pagingInfo:local!currentAccountIPSPagingInfo),&#xD;
+  local!prevAccountIPSInfo:#&quot;cfae07d7-29da-496a-9f89-cc3cb2c4ef8c&quot;(accountID:if(isnull(ri!accountID),0,ri!accountID),currentDate:today(),pagingInfo:local!prevAccountIPSPagingInfo),&#xD;
+  local!searchIPSInfo:#&quot;_a-0000db8a-e709-8000-6ee0-010000010000_2646&quot;(pagingInfo:local!searchIPSPagingInfo, timeHorizon:ri!searchTimeHorizon),&#xD;
+  &#xD;
+  #&quot;SYSTEM_SYSRULES_formLayout&quot;(&#xD;
+    label:&quot;Associate Account to an Investment Policy Statement&quot;,&#xD;
+  firstColumnContents: {&#xD;
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(&#xD;
+      label: &quot;Account Information&quot;,&#xD;
+      firstColumnContents: {&#xD;
+        #&quot;SYSTEM_SYSRULES_textField&quot;(&#xD;
+          label: &quot;Account ID&quot;,&#xD;
+          labelPosition: &quot;ADJACENT&quot;,&#xD;
+          value: ri!accountID,&#xD;
+          readOnly:true,&#xD;
+          align: &quot;LEFT&quot;&#xD;
+        ),&#xD;
+        &#xD;
+         #&quot;SYSTEM_SYSRULES_textField&quot;(&#xD;
+          label: &quot;Account Holder&quot;,&#xD;
+          labelPosition: &quot;ADJACENT&quot;,&#xD;
+          value: ri!accountHolderName,&#xD;
+          readOnly:true,&#xD;
+          align: &quot;LEFT&quot;&#xD;
+        )&#xD;
+      },&#xD;
+      secondColumnContents: {&#xD;
+        &#xD;
+         #&quot;SYSTEM_SYSRULES_textField&quot;(&#xD;
+          label: &quot;Account Type&quot;,&#xD;
+          labelPosition: &quot;ADJACENT&quot;,&#xD;
+          value: ri!accountType,&#xD;
+          readOnly:true,&#xD;
+          align: &quot;LEFT&quot;&#xD;
+        ),&#xD;
+        &#xD;
+         #&quot;SYSTEM_SYSRULES_textField&quot;(&#xD;
+          label: &quot;Custodian&quot;,&#xD;
+          labelPosition: &quot;ADJACENT&quot;,&#xD;
+          value: ri!custodian,&#xD;
+          readOnly:true,&#xD;
+          align: &quot;LEFT&quot;&#xD;
+        )&#xD;
+      }&#xD;
+    ),&#xD;
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(&#xD;
+      label: &quot;Investment Policy Statement (IPS)&quot;,&#xD;
+      firstColumnContents: {&#xD;
+       #&quot;SYSTEM_SYSRULES_gridField&quot;(&#xD;
+         label:&quot;Active IPS&quot;,&#xD;
+         totalCount:local!currentAccountIPSInfo.totalCount,&#xD;
+         columns:{&#xD;
+           #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(&#xD;
+             label:&quot;IPS&quot;,&#xD;
+             field:&quot;IPSID&quot;,&#xD;
+             data:index(local!currentAccountIPSInfo.data,&quot;IPSID&quot;,{}),&#xD;
+             links:fn!apply(#&quot;SYSTEM_SYSRULES_recordLink&quot;(recordType:#&quot;_a-0000db8a-e709-8000-6ee0-010000010000_2641&quot;,identifier:_),index(local!currentAccountIPSInfo.data,&quot;IPSID&quot;,{}))&#xD;
+           ),&#xD;
+           &#xD;
+            #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(&#xD;
+             label:&quot;Effective Date&quot;,&#xD;
+             field:&quot;effectiveDate&quot;,&#xD;
+             data:index(local!currentAccountIPSInfo.data,&quot;effectiveDate&quot;,{})&#xD;
+           ),&#xD;
+           &#xD;
+            #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(&#xD;
+             label:&quot;Expiration Date&quot;,&#xD;
+             field:&quot;expirationDate&quot;,&#xD;
+             data:index(local!currentAccountIPSInfo.data,&quot;expirationDate&quot;,{})&#xD;
+           )&#xD;
+         },&#xD;
+         value:local!currentAccountIPSPagingInfo,&#xD;
+         saveInto:local!currentAccountIPSPagingInfo&#xD;
+       )&#xD;
+       &#xD;
+       /*a!gridField(&#xD;
+         label:&quot;Expired IPS&quot;,&#xD;
+         totalCount:local!prevAccountIPSInfo.totalCount,&#xD;
+         columns:{&#xD;
+           a!gridTextColumn(&#xD;
+             label:&quot;IPS&quot;,&#xD;
+             field:&quot;IPSID&quot;,&#xD;
+             data:index(local!prevAccountIPSInfo.data,&quot;IPSID&quot;,{}),&#xD;
+             links:fn!apply(a!recordLink(recordType:cons!FRB_ES_RECORD_IPS,identifier:_),index(local!prevAccountIPSInfo.data,&quot;IPSID&quot;,{}))&#xD;
+           ),&#xD;
+           &#xD;
+            a!gridTextColumn(&#xD;
+             label:&quot;Effective Date&quot;,&#xD;
+             field:&quot;effectiveDate&quot;,&#xD;
+             data:index(local!prevAccountIPSInfo.data,&quot;effectiveDate&quot;,{})&#xD;
+           ),&#xD;
+           &#xD;
+            a!gridTextColumn(&#xD;
+             label:&quot;Expiration Date&quot;,&#xD;
+             field:&quot;expirationDate&quot;,&#xD;
+             data:index(local!prevAccountIPSInfo.data,&quot;expirationDate&quot;,{})&#xD;
+           )&#xD;
+         },&#xD;
+         value:local!prevAccountIPSPagingInfo,&#xD;
+         saveInto:local!prevAccountIPSPagingInfo&#xD;
+       )*/&#xD;
+       &#xD;
+      }&#xD;
+      &#xD;
+    ),&#xD;
+    &#xD;
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(&#xD;
+      label:&quot;Associate Investment Policy Statement&quot;,&#xD;
+      firstColumnContents:{&#xD;
+        &#xD;
+        #&quot;SYSTEM_SYSRULES_textField&quot;(&#xD;
+          label:&quot;Search by Time Horizon&quot;,&#xD;
+          value:ri!searchTimeHorizon,&#xD;
+          saveInto:ri!searchTimeHorizon,&#xD;
+          refreshAfter:&quot;UNFOCUS&quot;&#xD;
+        )&#xD;
+        &#xD;
+        &#xD;
+      },&#xD;
+      &#xD;
+      secondColumnContents:{&#xD;
+        #&quot;SYSTEM_SYSRULES_textField&quot;(&#xD;
+          label:&quot;&quot;,&#xD;
+          readOnly:true&#xD;
+        )&#xD;
+      }&#xD;
+    ),&#xD;
+    &#xD;
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(&#xD;
+      firstColumnContents:{&#xD;
+        #&quot;SYSTEM_SYSRULES_gridField&quot;(&#xD;
+         label:&quot;&quot;,&#xD;
+         totalCount:local!searchIPSInfo.totalCount,&#xD;
+         columns:{&#xD;
+           #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(&#xD;
+             label:&quot;IPS&quot;,&#xD;
+             field:&quot;IPSID&quot;,&#xD;
+             data:index(local!searchIPSInfo.data,&quot;IPSID&quot;,{}),&#xD;
+             links:fn!apply(#&quot;SYSTEM_SYSRULES_dynamicLink&quot;(value:_,saveInto:a!save(ri!selectedIPS,#&quot;9b5fd7b9-346c-41b4-a7ea-60478dbd76de&quot;(save!value))),index(local!searchIPSInfo.data,&quot;IPSID&quot;,{}))&#xD;
+           ),&#xD;
+           &#xD;
+            #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(&#xD;
+             label:&quot;Current Assets&quot;,&#xD;
+             field:&quot;currentAssets&quot;,&#xD;
+             data:index(local!searchIPSInfo.data,&quot;currentAssets&quot;,{})&#xD;
+           ),&#xD;
+           &#xD;
+            #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(&#xD;
+             label:&quot;Time Horizon&quot;,&#xD;
+             field:&quot;timeHorizon&quot;,&#xD;
+             data:index(local!searchIPSInfo.data,&quot;timeHorizon&quot;,{})&#xD;
+           ),&#xD;
+           &#xD;
+           #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(&#xD;
+             label:&quot;Modeled Return&quot;,&#xD;
+             field:&quot;modeledReturnPCT&quot;,&#xD;
+             data:index(local!searchIPSInfo.data,&quot;modeledReturnPCT&quot;,{})&#xD;
+           ),&#xD;
+           #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(&#xD;
+             label:&quot;Modeled Loss&quot;,&#xD;
+             field:&quot;modeledLossPCT&quot;,&#xD;
+             data:index(local!searchIPSInfo.data,&quot;modeledLossPCT&quot;,{})&#xD;
+           )&#xD;
+         },&#xD;
+         identifiers:index(local!searchIPSInfo.data,&quot;IPSID&quot;,{}),&#xD;
+         value:local!searchIPSSel,&#xD;
+         saveInto:local!searchIPSSel,&#xD;
+         selection:true,&#xD;
+         validations:if(count(local!searchIPSSel.selected)&gt;1,&quot;Please select only one IPS to assocatiate.&quot;,&quot;&quot;)&#xD;
+       )&#xD;
+      }&#xD;
+    ),&#xD;
+    &#xD;
+    &#xD;
+    &#xD;
+    &#xD;
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(&#xD;
+      firstColumnContents:{&#xD;
+        #&quot;SYSTEM_SYSRULES_dateField&quot;(&#xD;
+          label:&quot;Effective Date&quot;,&#xD;
+          value:ri!effectiveDate,&#xD;
+          saveInto:ri!effectiveDate,&#xD;
+          required:true,&#xD;
+          validations: if(ri!effectiveDate &lt; today(),&quot;Effective date needs to be greater than today.&quot;,&quot;&quot;)&#xD;
+        )&#xD;
+      },&#xD;
+      &#xD;
+      secondColumnContents:{&#xD;
+        #&quot;SYSTEM_SYSRULES_dateField&quot;(&#xD;
+          label:&quot;Expiration Date&quot;,&#xD;
+          value:ri!expirationDate,&#xD;
+          saveInto:ri!expirationDate,&#xD;
+          required:true,&#xD;
+          validations:if(ri!expirationDate &lt; today(),&quot;Expiration date needs to be greater than today.&quot;,if(ri!expirationDate &lt; ri!effectiveDate,&quot;Expiration date cannot be less than effective date&quot;,&quot;&quot;))&#xD;
+        )&#xD;
+      }&#xD;
+    ),&#xD;
+    &#xD;
+    if( tointeger(index(ri!selectedIPS,&quot;IPSID&quot;,0))&gt; 0, #&quot;7c677033-9030-4ca1-82dc-051c2d3c95b2&quot;(goal:ri!selectedIPS.goal,objectives:ri!selectedIPS.objectives,currentAssets:ri!selectedIPS.currentAssets, timeHorizon:ri!selectedIPS.timeHorizon, modeledReturnPCT:ri!selectedIPS.modeledReturnPCT, modeledLossPCT:ri!selectedIPS.modeledLossPCT,assetClassPreferences:ri!selectedIPS.assetClassPreferences),{})&#xD;
+  },&#xD;
+  secondColumnContents: {&#xD;
+    &#xD;
+  },&#xD;
+  &#xD;
+  buttons:#&quot;SYSTEM_SYSRULES_ButtonLayout&quot;(&#xD;
+    primaryButtons:{&#xD;
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(&#xD;
+        label:&quot;Submit&quot;,&#xD;
+        style:&quot;PRIMARY&quot;,&#xD;
+        confirmMessage:&quot;Are you sure you want to associate the account with the selected IPS ?&quot;,&#xD;
+        value:&quot;Submit&quot;,&#xD;
+        saveInto:{ri!formAction,a!save(ri!selIPSID,local!searchIPSSel.selected)},&#xD;
+        disabled:or(count(local!searchIPSSel.selected)=0,isnull(ri!effectiveDate),isnull(ri!expirationDate))&#xD;
+      )&#xD;
+    },&#xD;
+    secondaryButtons:{&#xD;
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(&#xD;
+        label:&quot;Cancel&quot;,&#xD;
+        style:&quot;NORMAL&quot;,&#xD;
+        value:&quot;Cancel&quot;,&#xD;
+        saveInto:ri!formAction,&#xD;
+        skipValidation:true&#xD;
+      )&#xD;
+    }&#xD;
+  )&#xD;
+  &#xD;
+  &#xD;
+  )&#xD;
+)&#xD;
+&#xD;
+)&#xD;
+</definition>
+        <namedTypedValue>
+            <name>accountID</name>
+            <type>
+                <name>int</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>accountHolderName</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>accountType</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>custodian</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>effectiveDate</name>
+            <type>
+                <name>date</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>expirationDate</name>
+            <type>
+                <name>date</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>formAction</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>selectedIPS</name>
+            <type>
+                <name>Variant</name>
+                <namespace>http://www.appian.com/ae/types/2009</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>selIPSID</name>
+            <type>
+                <name>int</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>searchTimeHorizon</name>
+            <type>
+                <name>Variant</name>
+                <namespace>http://www.appian.com/ae/types/2009</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users>
+                <userUuid>tarun.admin</userUuid>
+            </users>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>

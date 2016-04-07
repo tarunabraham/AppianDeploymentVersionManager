@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>FRB_ES_getIPSRecordListView</name>
+        <uuid>_a-0000db89-ac9f-8000-6ee0-010000010000_2627</uuid>
+        <description></description>
+        <parentUuid>_a-0000db89-ac9f-8000-6ee0-010000010000_2616</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>= #&quot;SYSTEM_SYSRULES_listViewItem&quot;(
+  title: &quot;IPS(&quot; &amp; rf!IPSID &amp; &quot;) &quot; &amp; &quot;Current Assets: &quot; &amp; rf!currentAssets &amp; &quot;,Time Horizon &quot; &amp; rf!timeHorizon,
+  details: rf!objectives
+)</definition>
+        <preferredEditor>legacy</preferredEditor>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users>
+                <userUuid>tarun.admin</userUuid>
+            </users>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>

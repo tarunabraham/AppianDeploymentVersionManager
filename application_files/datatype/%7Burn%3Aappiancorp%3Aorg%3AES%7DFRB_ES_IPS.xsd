@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="urn:appiancorp:org:ES"
+  xmlns:tns="urn:appiancorp:org:ES" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="FRB_ES_IPS">
+    <xsd:annotation>
+      <xsd:appinfo source="appian.jpa">
+                @Table(name="FRB_ES_IPS")
+			</xsd:appinfo>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="IPSID" nillable="true" type="xsd:int">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+                        @Id
+                        @GeneratedValue
+						@Column(name = "IPS_ID")
+					</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="goal" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+
+						@Column(name = "IPS_GOAL")
+					</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="objectives" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+
+						@Column(name = "IPS_OBJECTIVES")
+					</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="timeHorizon" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+
+						@Column(name = "TIME_HORIZON")
+					</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="riskTolerances" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+
+						@Column(name = "RISK_TOLERANCES")
+					</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="modeledReturnPCT" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+
+						@Column(name = "MODELED_RETURN_PCT")
+					</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="modeledLossPCT" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+
+						@Column(name = "MODELED_LOSS_PCT")
+					</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="currentAssets" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+
+						@Column(name = "CURRENT_ASSETS")
+					</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="assetClassPreferences" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+
+						@Column(name = "ASSET_CLASS_PREFERENCES")
+					</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
