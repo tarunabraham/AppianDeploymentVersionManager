@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<recordTypeHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <recordType name="Account" a:uuid="226efe9d-5bf5-43e9-854f-46375dde6b41">
+        <a:pluralName>Accounts</a:pluralName>
+        <a:description>List of all Active Customer Accounts</a:description>
+        <a:urlStub>xI3GGQ</a:urlStub>
+        <a:source xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="a:DataStoreEntity" a:uuid="49619558-2eff-4134-928d-ebefb94e4bc3@_a-0000db88-450a-8000-6ee0-010000010000_2589"/>
+        <a:listViewTemplateExpr>=#&quot;_a-0000db8a-e709-8000-6ee0-010000010000_2638&quot;()</a:listViewTemplateExpr>
+        <a:detailViewCfg>
+            <a:nameExpr>=&quot;Summary&quot;</a:nameExpr>
+            <a:uiExpr>=#&quot;020ab9f6-1797-42a3-923e-01717dfe74b2&quot;(
+accountID:rf!accountID,
+accountHolderName:rf!accountHolderName,
+accountType:rf!accountType,
+custodian:rf!custodian
+)</a:uiExpr>
+            <a:visibilityExpr>=true()</a:visibilityExpr>
+            <a:urlStub>summary</a:urlStub>
+            <a:headerExpr></a:headerExpr>
+            <a:relatedActionCfg>3cd377ce-a383-4a11-8bd1-629c60935811</a:relatedActionCfg>
+        </a:detailViewCfg>
+        <a:defaultSortInfo>
+            <field>accountID</field>
+            <ascending>true</ascending>
+        </a:defaultSortInfo>
+        <a:relatedActionCfg>
+            <a:target xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="a:ProcessModel" a:uuid="0007db8b-380e-8000-6ee0-010000010000"/>
+            <a:contextExpr>={accountID:rp!id}</a:contextExpr>
+            <a:visibilityExpr>=true()</a:visibilityExpr>
+            <a:refId>3cd377ce-a383-4a11-8bd1-629c60935811</a:refId>
+        </a:relatedActionCfg>
+        <a:isSystem>false</a:isSystem>
+        <a:dataSrcExpr></a:dataSrcExpr>
+        <a:facetsListExpr></a:facetsListExpr>
+        <a:defaultFiltersExpr></a:defaultFiltersExpr>
+        <a:security>16383</a:security>
+    </recordType>
+    <roleMap>
+        <role name="record_type_administrator">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000db85-cbb2-8000-6edf-010000010000_8</groupUuid>
+            </groups>
+        </role>
+        <role name="record_type_viewer">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000db85-cbb2-8000-6edf-010000010000_7</groupUuid>
+            </groups>
+        </role>
+    </roleMap>
+</recordTypeHaul>

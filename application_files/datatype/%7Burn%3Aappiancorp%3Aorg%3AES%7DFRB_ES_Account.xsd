@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="urn:appiancorp:org:ES"
+  xmlns:tns="urn:appiancorp:org:ES" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="FRB_ES_Account">
+    <xsd:annotation>
+      <xsd:appinfo source="appian.jpa">
+                @Table(name="FRB_ES_Account")
+			</xsd:appinfo>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="accountID" nillable="true" type="xsd:int">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+                        @Id
+                        @GeneratedValue
+						@Column(name = "ACCOUNT_ID")
+					</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="accountHolderName" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+
+						@Column(name = "ACCOUNT_HOLDER_NAME")
+					</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="accountType" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+
+						@Column(name = "ACCOUNT_TYPE")
+					</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="custodian" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+
+						@Column(name = "CUSTODIAN")
+					</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

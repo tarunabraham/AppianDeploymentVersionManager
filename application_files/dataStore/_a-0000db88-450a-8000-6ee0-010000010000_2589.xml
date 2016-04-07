@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dataStoreHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <dataStore>
+        <uuid>_a-0000db88-450a-8000-6ee0-010000010000_2589</uuid>
+        <name>FRB_ES_Tables</name>
+        <description></description>
+        <dataSourceKey>jdbc/AppianBusinessDS</dataSourceKey>
+        <adaptingExplicitSqlNames>false</adaptingExplicitSqlNames>
+        <entities>
+            <entity>
+                <uuid>ed9a0f99-586a-4060-ac25-a3420a1dfc66</uuid>
+                <name>FRB_ES_Customer</name>
+                <type>{urn:appiancorp:org:ES}FRB_ES_Customer</type>
+            </entity>
+            <entity>
+                <uuid>a6b23d9e-ad45-432f-b88a-6cfb98989308</uuid>
+                <name>FRB_ES_IPS</name>
+                <type>{urn:appiancorp:org:ES}FRB_ES_IPS</type>
+            </entity>
+            <entity>
+                <uuid>49619558-2eff-4134-928d-ebefb94e4bc3</uuid>
+                <name>FRB_ES_Account</name>
+                <type>{urn:appiancorp:org:ES}FRB_ES_Account</type>
+            </entity>
+            <entity>
+                <uuid>77f74647-a40c-4252-a51f-89f6444bb34d</uuid>
+                <name>FRB_ES_Account_IPS</name>
+                <type>{urn:appiancorp:org:ES}FRB_ES_Account_IPS</type>
+            </entity>
+        </entities>
+    </dataStore>
+    <isPublished>true</isPublished>
+    <roleMap>
+        <role allowForAll="false" inherit="false" name="administrators">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000db85-cbb2-8000-6edf-010000010000_8</groupUuid>
+            </groups>
+        </role>
+        <role allowForAll="false" inherit="false" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="readers">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000db85-cbb2-8000-6edf-010000010000_7</groupUuid>
+            </groups>
+        </role>
+    </roleMap>
+</dataStoreHaul>

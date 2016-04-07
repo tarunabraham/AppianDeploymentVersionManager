@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>FRB_ES_getCustomerStockQuote</name>
+        <uuid>_a-0000db88-450a-8000-6ee0-010000010000_2600</uuid>
+        <description></description>
+        <parentUuid>_a-0000db88-450a-8000-6ee0-010000010000_2593</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>= #&quot;SYSTEM_SYSRULES_imageField&quot;(
+  images: {
+    #&quot;SYSTEM_SYSRULES_webImage&quot;(
+      source: &quot;http://chart.finance.yahoo.com/z?s=&quot; &amp; ri!customeTicker &amp; &quot;&amp;t=6m&amp;q=l&amp;l=on&amp;z=l&amp;p=m50,e200,v&amp;a=p12,p&amp;c=%5EDJI,EURUSD=X&quot;
+    )
+  }
+)</definition>
+        <namedTypedValue>
+            <name>customeTicker</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <preferredEditor>legacy</preferredEditor>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users>
+                <userUuid>tarun.admin</userUuid>
+            </users>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>

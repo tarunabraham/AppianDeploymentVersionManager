@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>FRB_ES_getAccountRecordSummaryView</name>
+        <uuid>020ab9f6-1797-42a3-923e-01717dfe74b2</uuid>
+        <description></description>
+        <parentUuid>_a-0000db89-ac9f-8000-6ee0-010000010000_2617</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>=load(
+  local!currentAccountIPSPagingInfo:#&quot;SYSTEM_SYSRULES_pagingInfo&quot;(
+    startIndex:1,
+    batchSize:-1,
+    sort:#&quot;SYSTEM_SYSRULES_sortInfo&quot;(
+      field:&quot;effectiveDate&quot;,
+      ascending:true
+    )
+  ),
+  
+  local!prevAccountIPSPagingInfo:#&quot;SYSTEM_SYSRULES_pagingInfo&quot;(
+    startIndex:1,
+    batchSize:5,
+    sort:#&quot;SYSTEM_SYSRULES_sortInfo&quot;(
+      field:&quot;effectiveDate&quot;,
+      ascending:true
+    )
+  ),
+  
+with(
+  local!currentAccountIPSInfo:#&quot;a9e23335-404e-48f4-aa43-e83e247c31e0&quot;(accountID:if(isnull(ri!accountID),0,ri!accountID),currentDate:today(),pagingInfo:local!currentAccountIPSPagingInfo),
+  local!prevAccountIPSInfo:#&quot;cfae07d7-29da-496a-9f89-cc3cb2c4ef8c&quot;(accountID:if(isnull(ri!accountID),0,ri!accountID),currentDate:today(),pagingInfo:local!prevAccountIPSPagingInfo),
+  
+  #&quot;SYSTEM_SYSRULES_dashboardLayout&quot;(
+  firstColumnContents: {
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+      label: &quot;Account Information&quot;,
+      firstColumnContents: {
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;Account ID&quot;,
+          labelPosition: &quot;ADJACENT&quot;,
+          readOnly:true,
+          value: ri!accountID,
+          align: &quot;LEFT&quot;
+        ),
+        
+         #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;Account Holder&quot;,
+          labelPosition: &quot;ADJACENT&quot;,
+          readOnly:true,
+          value: ri!accountHolderName,
+          align: &quot;LEFT&quot;
+        )
+      },
+      secondColumnContents: {
+        
+         #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;Account Type&quot;,
+          labelPosition: &quot;ADJACENT&quot;,
+          readOnly:true,
+          value: ri!accountType,
+          align: &quot;LEFT&quot;
+        ),
+        
+         #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;Custodian&quot;,
+          labelPosition: &quot;ADJACENT&quot;,
+          readOnly:true,
+          value: ri!custodian,
+          align: &quot;LEFT&quot;
+        )
+      }
+    ),
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+      label: &quot;Investment Policy Statement (IPS)&quot;,
+      firstColumnContents: {
+       #&quot;SYSTEM_SYSRULES_gridField&quot;(
+         label:&quot;Active IPS&quot;,
+         totalCount:local!currentAccountIPSInfo.totalCount,
+         columns:{
+           #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+             label:&quot;IPS&quot;,
+             field:&quot;IPSID&quot;,
+             data:index(local!currentAccountIPSInfo.data,&quot;IPSID&quot;,{}),
+             links:fn!apply(#&quot;SYSTEM_SYSRULES_recordLink&quot;(recordType:#&quot;_a-0000db8a-e709-8000-6ee0-010000010000_2641&quot;,identifier:_),index(local!currentAccountIPSInfo.data,&quot;IPSID&quot;,{}))
+           ),
+           
+            #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+             label:&quot;Effective Date&quot;,
+             field:&quot;effectiveDate&quot;,
+             data:index(local!currentAccountIPSInfo.data,&quot;effectiveDate&quot;,{})
+           ),
+           
+            #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+             label:&quot;Expiration Date&quot;,
+             field:&quot;expirationDate&quot;,
+             data:index(local!currentAccountIPSInfo.data,&quot;expirationDate&quot;,{})
+           )
+         },
+         value:local!currentAccountIPSPagingInfo,
+         saveInto:local!currentAccountIPSPagingInfo
+       ),
+       
+       #&quot;SYSTEM_SYSRULES_gridField&quot;(
+         label:&quot;Expired IPS&quot;,
+         totalCount:local!prevAccountIPSInfo.totalCount,
+         columns:{
+           #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+             label:&quot;IPS&quot;,
+             field:&quot;IPSID&quot;,
+             data:index(local!prevAccountIPSInfo.data,&quot;IPSID&quot;,{}),
+             links:fn!apply(#&quot;SYSTEM_SYSRULES_recordLink&quot;(recordType:#&quot;_a-0000db8a-e709-8000-6ee0-010000010000_2641&quot;,identifier:_),index(local!prevAccountIPSInfo.data,&quot;IPSID&quot;,{}))
+           ),
+           
+            #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+             label:&quot;Effective Date&quot;,
+             field:&quot;effectiveDate&quot;,
+             data:index(local!prevAccountIPSInfo.data,&quot;effectiveDate&quot;,{})
+           ),
+           
+            #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+             label:&quot;Expiration Date&quot;,
+             field:&quot;expirationDate&quot;,
+             data:index(local!prevAccountIPSInfo.data,&quot;expirationDate&quot;,{})
+           )
+         },
+         value:local!prevAccountIPSPagingInfo,
+         saveInto:local!prevAccountIPSPagingInfo
+       )
+      }
+      
+    )
+  },
+  secondColumnContents: {}
+)
+
+)
+)</definition>
+        <namedTypedValue>
+            <name>accountID</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>accountHolderName</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>accountType</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>custodian</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users>
+                <userUuid>tarun.admin</userUuid>
+            </users>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>
